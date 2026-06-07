@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Las Olas — Piezas clave para tu verano</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #EDEAE2;
+      --cream-dark: #E0DDD5;
+      --red: #8C1C13;
+      --red-light: #A52018;
+      --ocean: #3E6E8E;
+      --sand: #C8A97A;
+      --text: #2A2420;
+      --text-muted: #7A6E66;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    .nav-cart {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 5rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ocean);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      line-height: 1.05;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title span {
+      color: var(--red);
+      font-style: italic;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 380px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--red);
+      color: var(--cream);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--red-light); transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 32px;
+      border: 1px solid rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--red); color: var(--red); }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .hero-right {
+      position: relative;
+      background: var(--cream-dark);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Wave decoration */
+    .wave-bg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+    }
+
+    .hero-img-placeholder {
+      width: 340px;
+      height: 440px;
+      background: var(--cream-dark);
+      border: 1px solid rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-img-placeholder span {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* BAND */
+    .band {
+      background: var(--red);
+      color: var(--cream);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .band-inner {
+      display: inline-flex;
+      gap: 3rem;
+      animation: marquee 18s linear infinite;
+    }
+
+    .band-item {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 400;
+      flex-shrink: 0;
+    }
+
+    .band-dot {
+      color: rgba(255,255,255,0.4);
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+    }
+
+    .section-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ocean);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .section-title em {
+      color: var(--red);
+      font-style: italic;
+    }
+
+    /* PRODUCTS */
+    .products {
+      padding: 0 3rem 5rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--cream);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .product-card:hover { transform: translateY(-4px); }
+    .product-card:hover .product-img-wrap::after { opacity: 1; }
+
+    .product-img-wrap {
+      aspect-ratio: 3/4;
+      background: var(--cream-dark);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-img-wrap::after {
+      content: 'Ver producto';
+      position: absolute;
+      inset: 0;
+      background: rgba(140, 28, 19, 0.75);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .product-emoji {
+      font-size: 64px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--red);
+      color: white;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      z-index: 2;
+    }
+
+    .product-badge.ocean {
+      background: var(--ocean);
+    }
+
+    .product-info {
+      padding: 14px 4px 6px;
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .product-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .btn-add {
+      background: transparent;
+      border: 1px solid rgba(0,0,0,0.18);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .btn-add:hover { background: var(--red); border-color: var(--red); color: white; }
+
+    /* FEATURED BANNER */
+    .featured-banner {
+      margin: 0 3rem 5rem;
+      background: var(--ocean);
+      padding: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .featured-banner-text {}
+
+    .banner-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 1rem;
+    }
+
+    .banner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .banner-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .btn-white {
+      display: inline-block;
+      background: white;
+      color: var(--ocean);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 28px;
+      transition: opacity 0.2s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+
+    .featured-banner-visual {
+      display: flex;
+      gap: 12px;
+    }
+
+    .banner-img-block {
+      flex: 1;
+      aspect-ratio: 3/4;
+      background: rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 52px;
+    }
+
+    /* WHY US */
+    .why {
+      padding: 3rem 3rem 5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .why-item {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .why-icon {
+      font-size: 32px;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .why-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .why-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* QUOTE */
+    .quote-section {
+      background: var(--text);
+      padding: 5rem 3rem;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      font-style: italic;
+      color: var(--cream);
+      max-width: 680px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.45;
+    }
+
+    .quote-attr {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sand);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--cream-dark);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 280px;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(0,0,0,0.15);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-social a:hover { border-color: var(--red); color: var(--red); }
+
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-col ul a {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--red); }
+
+    .footer-bottom {
+      background: var(--cream-dark);
+      border-top: 1px solid rgba(0,0,0,0.07);
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* WAVE SVG */
+    .wave-divider {
+      display: block;
+      width: 100%;
+      height: 60px;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(42, 36, 32, 0.55);
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal {
+      background: var(--cream);
+      width: 100%;
+      max-width: 640px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      transform: translateY(16px);
+      transition: transform 0.25s;
+    }
+    .modal-overlay.open .modal {
+      transform: translateY(0);
+    }
+    .modal-img {
+      background: var(--cream-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 96px;
+      aspect-ratio: 1;
+      position: relative;
+    }
+    .modal-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--red);
+      color: white;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+    }
+    .modal-badge.ocean { background: var(--ocean); }
+    .modal-body {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 22px;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ocean);
+      margin-bottom: 0.5rem;
+    }
+    .modal-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .modal-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+    .modal-price {
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .modal .btn-primary {
+      width: 100%;
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+    }
+    .modal-added {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #2A6B3C;
+      color: white;
+      padding: 15px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    @media (max-width: 540px) {
+      .modal { grid-template-columns: 1fr; max-width: 340px; }
+      .modal-img { aspect-ratio: 4/3; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      nav .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 300px; }
+      .hero-left { padding: 3rem 2rem; }
+      .products { padding: 0 1.5rem 3rem; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .featured-banner { margin: 0 1.5rem 3rem; grid-template-columns: 1fr; padding: 2.5rem; }
+      .why { grid-template-columns: repeat(2, 1fr); padding: 2rem 1.5rem 3rem; }
+      footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .footer-bottom { padding: 1rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">las olas</a>
+    <ul class="nav-links">
+      <li><a href="#">Productos</a></li>
+      <li><a href="#">Lookbook</a></li>
+      <li><a href="#">Nosotras</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+    <a class="nav-cart" href="#">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Bolsa (0)
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Temporada verano · Uruguay</p>
+      <h1 class="hero-title">Piezas clave<br/>para tu <span>verano</span></h1>
+      <p class="hero-desc">Un universo veraniego donde el diseño, la novedad y la diversión se encuentran. Accesorios pensados para vivir el verano con personalidad.</p>
+      <div class="hero-ctas">
+        <a href="#productos" class="btn-primary">Ver productos</a>
+        <a href="#" class="btn-outline">Nuestra historia</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual">
+        <!-- Wave background -->
+        <svg class="wave-bg" viewBox="0 0 800 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,80 C133,20 267,140 400,80 C533,20 667,140 800,80 L800,180 L0,180 Z" fill="#3E6E8E" opacity="0.18"/>
+          <path d="M0,110 C133,50 267,160 400,110 C533,50 667,160 800,110 L800,180 L0,180 Z" fill="#8C1C13" opacity="0.12"/>
+        </svg>
+        <!-- Floating product mockup -->
+        <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:1.5rem;">
+          <div style="background:var(--cream); border:1px solid rgba(0,0,0,0.09); width:280px; padding:2rem; text-align:center; position:relative;">
+            <div style="position:absolute; top:12px; left:12px; background:var(--red); color:white; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 10px;">Nuevo</div>
+            <div style="font-size:88px; margin-bottom:1rem;">🏖️</div>
+            <p style="font-family:'Playfair Display',serif; font-size:20px; color:var(--text); margin-bottom:4px;">Pareo antiVIENTO</p>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Diseño estampado · Talla única</p>
+            <p style="font-size:22px; font-weight:500; color:var(--text);">$1.850</p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <div style="width:48px; height:48px; background:var(--cream-dark); border:2px solid var(--red);"></div>
+            <div style="width:48px; height:48px; background:var(--cream-dark); border:1px solid rgba(0,0,0,0.1);"></div>
+            <div style="width:48px; height:48px; background:var(--cream-dark); border:1px solid rgba(0,0,0,0.1);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND -->
+  <div class="band" aria-hidden="true">
+    <div class="band-inner">
+      <span class="band-item">Envíos a todo Uruguay</span><span class="band-dot">·</span>
+      <span class="band-item">Piezas exclusivas</span><span class="band-dot">·</span>
+      <span class="band-item">Diseño & calidad</span><span class="band-dot">·</span>
+      <span class="band-item">Temporada verano</span><span class="band-dot">·</span>
+      <span class="band-item">Envíos a todo Uruguay</span><span class="band-dot">·</span>
+      <span class="band-item">Piezas exclusivas</span><span class="band-dot">·</span>
+      <span class="band-item">Diseño & calidad</span><span class="band-dot">·</span>
+      <span class="band-item">Temporada verano</span><span class="band-dot">·</span>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section id="productos">
+    <div class="section-header">
+      <p class="section-eyebrow">Colección actual</p>
+      <h2 class="section-title">Nuestros <em>favoritos</em></h2>
+    </div>
+    <div class="products">
+      <div class="products-grid">
+
+        <div class="product-card" onclick="openModal(this)"
+          data-emoji="🏖️" data-name="Pareo antiVIENTO" data-sub="Accesorios de playa"
+          data-desc="Diseñado para aguantar el viento sin perder estilo. Tela liviana con estampado floral exclusivo. Talla única, ideal para la playa o la pileta."
+          data-price="$1.850" data-badge="Más vendido" data-badge-class="">
+          <div class="product-img-wrap">
+            <div class="product-badge">Más vendido</div>
+            <span class="product-emoji">🏖️</span>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Pareo antiVIENTO</p>
+            <p class="product-sub">Estampado floral · Talla única</p>
+            <div class="product-footer">
+              <span class="product-price">$1.850</span>
+              <button class="btn-add" onclick="event.stopPropagation()">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" onclick="openModal(this)"
+          data-emoji="👜" data-name="Bolso de playa" data-sub="Accesorios de playa"
+          data-desc="Bolso amplio con rayas rojas y blancas, perfecto para llevar todo lo del día de playa. Tela resistente y asa larga para comodidad."
+          data-price="$1.200" data-badge="Nuevo" data-badge-class="ocean">
+          <div class="product-img-wrap">
+            <div class="product-badge ocean">Nuevo</div>
+            <span class="product-emoji">👜</span>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Bolso de playa</p>
+            <p class="product-sub">Rayas rojas y blancas</p>
+            <div class="product-footer">
+              <span class="product-price">$1.200</span>
+              <button class="btn-add" onclick="event.stopPropagation()">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" onclick="openModal(this)"
+          data-emoji="🌊" data-name="Pinzas antiVIENTO" data-sub="Accesorios de playa"
+          data-desc="Set de 4 pinzas para mantener tu toalla o pareo fijo aunque sople viento. Varios diseños de verano, livianas y resistentes."
+          data-price="$650" data-badge="" data-badge-class="">
+          <div class="product-img-wrap">
+            <span class="product-emoji">🌊</span>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Pinzas antiVIENTO</p>
+            <p class="product-sub">Set x4 · Varios diseños</p>
+            <div class="product-footer">
+              <span class="product-price">$650</span>
+              <button class="btn-add" onclick="event.stopPropagation()">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" onclick="openModal(this)"
+          data-emoji="🎨" data-name="Stickers verano" data-sub="Papelería & deco"
+          data-desc="Set de 20 stickers con ilustraciones de verano: conchas, frutas, olas, cremas y más. Ideales para personalizar tu botella, cuaderno o notebook."
+          data-price="$420" data-badge="Nuevo" data-badge-class="ocean">
+          <div class="product-img-wrap">
+            <div class="product-badge ocean">Nuevo</div>
+            <span class="product-emoji">🎨</span>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Stickers verano</p>
+            <p class="product-sub">Set de 20 · Diseño ilustrado</p>
+            <div class="product-footer">
+              <span class="product-price">$420</span>
+              <button class="btn-add" onclick="event.stopPropagation()">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" onclick="openModal(this)"
+          data-emoji="☀️" data-name="Zinc solar stick" data-sub="Protección solar"
+          data-desc="Zinc en formato stick, SPF 50+. Fácil de aplicar, resistente al agua. Disponible en varios colores para lucir en la playa con estilo."
+          data-price="$380" data-badge="" data-badge-class="">
+          <div class="product-img-wrap">
+            <span class="product-emoji">☀️</span>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Zinc solar stick</p>
+            <p class="product-sub">SPF 50+ · Colores verano</p>
+            <div class="product-footer">
+              <span class="product-price">$380</span>
+              <button class="btn-add" onclick="event.stopPropagation()">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" onclick="openModal(this)"
+          data-emoji="🎁" data-name="Kit verano completo" data-sub="Combos & regalos"
+          data-desc="El regalo de verano perfecto: pareo antiVIENTO + bolso de playa + set de stickers. Packaging incluido, listo para regalar o para vos."
+          data-price="$2.900" data-badge="Combo" data-badge-class="">
+          <div class="product-img-wrap">
+            <div class="product-badge">Combo</div>
+            <span class="product-emoji">🎁</span>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Kit verano completo</p>
+            <p class="product-sub">Pareo + bolso + stickers</p>
+            <div class="product-footer">
+              <span class="product-price">$2.900</span>
+              <button class="btn-add" onclick="event.stopPropagation()">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED BANNER -->
+  <div class="featured-banner">
+    <div class="featured-banner-text">
+      <p class="banner-eyebrow">Colección especial</p>
+      <h3 class="banner-title">Pareos antiVIENTO</h3>
+      <p class="banner-desc">Diseñados para aguantar el viento sin perder estilo. Tela liviana, estampados únicos y el toque de color que tu verano necesita.</p>
+      <a href="#" class="btn-white">Ver colección</a>
+    </div>
+    <div class="featured-banner-visual">
+      <div class="banner-img-block">🌿</div>
+      <div class="banner-img-block" style="margin-top:2rem;">🌊</div>
+    </div>
+  </div>
+
+  <!-- WHY US -->
+  <div class="why">
+    <div class="why-item">
+      <span class="why-icon">📦</span>
+      <p class="why-title">Envíos a todo Uruguay</p>
+      <p class="why-desc">Despachamos en 24-48hs. Seguí tu pedido en tiempo real.</p>
+    </div>
+    <div class="why-item">
+      <span class="why-icon">✨</span>
+      <p class="why-title">Diseño exclusivo</p>
+      <p class="why-desc">Piezas pensadas con personalidad. No vas a encontrarlas en otro lado.</p>
+    </div>
+    <div class="why-item">
+      <span class="why-icon">🤍</span>
+      <p class="why-title">Hecho con amor</p>
+      <p class="why-desc">Cada pieza es seleccionada con cuidado para tu verano ideal.</p>
+    </div>
+    <div class="why-item">
+      <span class="why-icon">💬</span>
+      <p class="why-title">Atención directa</p>
+      <p class="why-desc">Hablá con nosotras por Instagram o WhatsApp, siempre respondemos.</p>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <p class="quote-text">"Piezas pensadas para quienes buscan vivir el verano con personalidad y un toque de exclusividad."</p>
+    <p class="quote-attr">— Las Olas, Uruguay</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <p class="footer-brand-name">las olas</p>
+      <p class="footer-tagline">Un universo veraniego donde el diseño, la novedad y la diversión se encuentran. Uruguay.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/lasolas.uy/" target="_blank" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" title="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Tienda</h4>
+      <ul>
+        <li><a href="#">Todos los productos</a></li>
+        <li><a href="#">Pareos</a></li>
+        <li><a href="#">Bolsos</a></li>
+        <li><a href="#">Accesorios</a></li>
+        <li><a href="#">Kits regalo</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#">Nosotras</a></li>
+        <li><a href="#">Envíos y devoluciones</a></li>
+        <li><a href="#">Preguntas frecuentes</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025 Las Olas. Todos los derechos reservados.</p>
+    <p>Hecho con ♥ en Uruguay</p>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-img" id="modalImg">
+        <span id="modalEmoji" style="font-size:96px;"></span>
+        <div id="modalBadge" class="modal-badge" style="display:none;"></div>
+      </div>
+      <div class="modal-body" style="position:relative;">
+        <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">×</button>
+        <div>
+          <p class="modal-eyebrow" id="modalSub"></p>
+          <h2 class="modal-name" id="modalName"></h2>
+          <p class="modal-desc" id="modalDesc"></p>
+          <p class="modal-price" id="modalPrice"></p>
+        </div>
+        <div>
+          <button class="btn-primary" id="modalAddBtn" onclick="handleAdd()" style="width:100%; text-align:center;">Agregar al carrito</button>
+          <div class="modal-added" id="modalAdded">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            ¡Agregado al carrito!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(card) {
+      const d = card.dataset;
+      document.getElementById('modalEmoji').textContent = d.emoji;
+      document.getElementById('modalName').textContent = d.name;
+      document.getElementById('modalSub').textContent = d.sub;
+      document.getElementById('modalDesc').textContent = d.desc;
+      document.getElementById('modalPrice').textContent = d.price;
+
+      const badge = document.getElementById('modalBadge');
+      if (d.badge) {
+        badge.textContent = d.badge;
+        badge.className = 'modal-badge' + (d.badgeClass ? ' ' + d.badgeClass : '');
+        badge.style.display = 'block';
+      } else {
+        badge.style.display = 'none';
+      }
+
+      document.getElementById('modalAddBtn').style.display = 'block';
+      document.getElementById('modalAdded').style.display = 'none';
+
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOnOverlay(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+
+    function handleAdd() {
+      document.getElementById('modalAddBtn').style.display = 'none';
+      document.getElementById('modalAdded').style.display = 'flex';
+      setTimeout(closeModal, 1400);
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
+
+</body>
+</html>
