@@ -363,8 +363,10 @@
       cursor: pointer;
       transition: transform 0.2s;
     }
-    .product-card:hover { transform: translateY(-4px); }
-    .product-card:hover .product-img-wrap::after { opacity: 1; }
+    @media (hover: hover) and (pointer: fine) {
+      .product-card:hover { transform: translateY(-4px); }
+      .product-card:hover .product-img-wrap::after { opacity: 1; }
+    }
 
     /* PRODUCT THUMBNAILS */
     .product-card .product-media-dots,
