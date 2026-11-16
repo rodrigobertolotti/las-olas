@@ -534,6 +534,44 @@
       letter-spacing: 0.02em;
     }
 
+    /* PRODUCT VARIANTS (card) */
+    .product-variants {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .product-variant-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .product-variant-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+    .variant-chip {
+      padding: 2px 9px;
+      border: 1px solid rgba(0,0,0,0.18);
+      background: transparent;
+      font-family: inherit;
+      font-size: 11px;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+    }
+    .variant-chip:hover:not(.active) { border-color: var(--text); }
+    .variant-chip.active {
+      border-color: var(--ocean);
+      background: var(--ocean);
+      color: white;
+    }
+
     .product-footer {
       display: flex;
       align-items: center;
@@ -1241,6 +1279,9 @@
     }
 
     .detail-size-selector { display: none; }
+    #detailOptions { display: flex; flex-direction: column; gap: 1.1rem; }
+    #detailOptions:empty { display: none; }
+    #detailOptions .detail-size-selector { display: block; }
     .detail-size-label {
       font-size: 11px;
       font-weight: 600;
@@ -1646,7 +1687,7 @@
 
           <div class="product-card" onclick="openModal(this)"
             data-emoji="👒" data-name="Gorro surf" data-sub="Gorros"
-            data-sizes="Hojas|Estrellas" data-size-label="Modelo" data-variant-starts="0|1"
+            data-options="Modelo:Hojas@0|Estrellas@1;Casco:Con casco|Sin casco"
             data-desc="Gorro de surf para usar en el agua y en la playa. Tiene un casco interno que lo mantiene firme en la cabeza, ala ancha que protege del sol y correa ajustable para que no se vuele con el viento ni se pierda en las olas."
             data-price="Consultar" data-badge="" data-badge-class=""
             data-detail="Casco interno que se ajusta a la cabeza||Ala ancha para protegerte del sol||Correa ajustable con traba al mentón||Pensado para surfear, nadar y usar en la playa||Estampado exclusivo con logo Las Olas bordado">
@@ -1658,7 +1699,7 @@
             </div>
             <div class="product-info">
               <p class="product-name">Gorro surf</p>
-              <p class="product-sub">Casco interno · Modelos Hojas y Estrellas</p>
+              <p class="product-sub">Con o sin casco interno</p>
               <div class="product-footer">
                 <span class="product-price">Consultar</span>
               </div>
@@ -1902,7 +1943,7 @@
         <!-- GORROS -->
         <div class="product-card" onclick="openModal(this)"
           data-emoji="👒" data-name="Gorro surf" data-sub="Gorros"
-            data-sizes="Hojas|Estrellas" data-size-label="Modelo" data-variant-starts="0|1"
+            data-options="Modelo:Hojas@0|Estrellas@1;Casco:Con casco|Sin casco"
           data-desc="Gorro de surf para usar en el agua y en la playa. Tiene un casco interno que lo mantiene firme en la cabeza, ala ancha que protege del sol y correa ajustable para que no se vuele con el viento ni se pierda en las olas."
           data-price="Consultar" data-badge="" data-badge-class=""
           data-detail="Casco interno que se ajusta a la cabeza||Ala ancha para protegerte del sol||Correa ajustable con traba al mentón||Pensado para surfear, nadar y usar en la playa||Estampado exclusivo con logo Las Olas bordado">
@@ -1914,7 +1955,7 @@
           </div>
           <div class="product-info">
             <p class="product-name">Gorro surf</p>
-            <p class="product-sub">Casco interno · Modelos Hojas y Estrellas</p>
+            <p class="product-sub">Con o sin casco interno</p>
             <div class="product-footer">
               <span class="product-price">Consultar</span>
             </div>
@@ -2104,10 +2145,7 @@
         <p class="detail-desc" id="detailDesc"></p>
 
         <!-- SIZE SELECTOR -->
-        <div class="detail-size-selector" id="detailSizeSelector">
-          <p class="detail-size-label">Talle</p>
-          <div class="detail-size-btns" id="detailSizeBtns"></div>
-        </div>
+        <div id="detailOptions"></div>
 
         <p class="detail-price" id="detailPrice"></p>
 
@@ -2235,6 +2273,67 @@
       });
     }
     buildCardThumbs();
+
+    // --- Product variants ---
+    // A card declares its option groups with data-options, e.g.
+    //   data-options="Modelo:Hojas@0|Estrellas@1;Casco:Con casco|Sin casco"
+    // Groups are separated by ";", values by "|". "@N" (optional) is the index
+    // of the first photo of that variant, so picking it jumps to its photo.
+    // Cards that still use data-sizes / data-size-label / data-variant-starts
+    // are converted to the same structure.
+    function parseOptionGroups(d) {
+      if (d.options) {
+        return d.options.split(';').map(g => g.trim()).filter(Boolean).map(g => {
+          const sep = g.indexOf(':');
+          const label = g.slice(0, sep).trim();
+          const values = g.slice(sep + 1).split('|').map(v => {
+            const [name, start] = v.split('@');
+            return { name: name.trim(), start: start !== undefined ? Number(start) : null };
+          });
+          return { label, values };
+        });
+      }
+      if (d.sizes) {
+        const starts = d.variantStarts ? d.variantStarts.split('|').map(Number) : [];
+        return [{
+          label: d.sizeLabel || 'Talle',
+          values: d.sizes.split('|').map((s, i) => ({ name: s, start: starts[i] !== undefined ? starts[i] : null }))
+        }];
+      }
+      return [];
+    }
+
+    function showCardSlide(card, index) {
+      const carousel = card.querySelector('.product-media-carousel');
+      if (carousel) carousel.style.transform = `translateX(-${index * 100}%)`;
+      card.querySelectorAll('.product-thumb').forEach((t, i) => t.classList.toggle('active', i === index));
+    }
+
+    function pickCardVariant(e, chip) {
+      e.stopPropagation();
+      const group = chip.closest('.product-variant-group');
+      group.querySelectorAll('.variant-chip').forEach(c => c.classList.toggle('active', c === chip));
+      if (chip.dataset.start !== '') showCardSlide(chip.closest('.product-card'), Number(chip.dataset.start));
+    }
+
+    function buildCardVariants() {
+      document.querySelectorAll('.product-card').forEach(card => {
+        if (card.querySelector('.product-variants')) return;
+        const groups = parseOptionGroups(card.dataset);
+        if (!groups.length) return;
+        const box = document.createElement('div');
+        box.className = 'product-variants';
+        box.innerHTML = groups.map(g =>
+          `<div class="product-variant-group"><span class="product-variant-label">${g.label}</span>` +
+          g.values.map((v, i) =>
+            `<button type="button" class="variant-chip${i===0?' active':''}" data-start="${v.start ?? ''}" onclick="pickCardVariant(event,this)">${v.name}</button>`
+          ).join('') + '</div>'
+        ).join('');
+        const anchor = card.querySelector('.product-footer');
+        if (anchor) anchor.insertAdjacentElement('beforebegin', box);
+      });
+    }
+    buildCardVariants();
 
     // Product media carousel
     function slideMedia(e, btn, dir) {
@@ -2424,13 +2523,9 @@
       updateDetailPriceDisplay();
     }
 
-    let currentVariantStarts = null;
     function selectSize(btn) {
-      const btns = Array.from(btn.closest('.detail-size-btns').querySelectorAll('.size-btn'));
-      btns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const idx = btns.indexOf(btn);
-      if (currentVariantStarts && currentVariantStarts[idx] !== undefined) goToDetailSlide(currentVariantStarts[idx]);
+      btn.closest('.detail-size-btns').querySelectorAll('.size-btn').forEach(b => b.classList.toggle('active', b === btn));
+      if (btn.dataset.start !== '') goToDetailSlide(Number(btn.dataset.start));
     }
 
     // Accordion
@@ -2450,22 +2545,24 @@
       document.getElementById('detailName').textContent = d.name;
       document.getElementById('detailDesc').textContent = d.desc;
 
-      // Size selector
-      const sizeSelector = document.getElementById('detailSizeSelector');
-      const sizeBtns = document.getElementById('detailSizeBtns');
-      if (d.sizes) {
-        const sizes = d.sizes.split('|');
-        sizeBtns.innerHTML = sizes.map((s, i) =>
-          `<button class="size-btn${i===0?' active':''}" onclick="selectSize(this)">${s}</button>`
-        ).join('');
-        sizeSelector.style.display = 'block';
-        document.querySelector('#detailSizeSelector .detail-size-label').textContent = d.sizeLabel || 'Talle';
-        currentVariantStarts = d.variantStarts ? d.variantStarts.split('|').map(Number) : null;
-      } else {
-        sizeSelector.style.display = 'none';
-        sizeBtns.innerHTML = '';
-        currentVariantStarts = null;
-      }
+      // Variant / size selectors (one block per option group),
+      // preselecting whatever the shopper picked on the card.
+      const groups = parseOptionGroups(d);
+      const cardGroups = card.querySelectorAll('.product-variant-group');
+      const selected = groups.map((g, gi) => {
+        const chips = cardGroups[gi] ? Array.from(cardGroups[gi].querySelectorAll('.variant-chip')) : [];
+        return Math.max(0, chips.findIndex(c => c.classList.contains('active')));
+      });
+      document.getElementById('detailOptions').innerHTML = groups.map((g, gi) =>
+        `<div class="detail-size-selector" data-label="${g.label}">
+          <p class="detail-size-label">${g.label}</p>
+          <div class="detail-size-btns">` +
+          g.values.map((v, i) =>
+            `<button class="size-btn${i===selected[gi]?' active':''}" data-start="${v.start ?? ''}" onclick="selectSize(this)">${v.name}</button>`
+          ).join('') +
+        `</div></div>`
+      ).join('');
+      const initialSlide = groups.map((g, gi) => g.values[selected[gi]].start).find(s => s !== null);
 
       // Accordion description
       const accDesc = document.getElementById('detailAccordionDesc');
@@ -2507,6 +2604,7 @@
           carouselHTML += '</div>';
         }
         mediaContainer.innerHTML = carouselHTML;
+        if (initialSlide) goToDetailSlide(initialSlide);
       } else {
         mediaContainer.innerHTML = `<div class="detail-emoji-fallback">${d.emoji}</div>`;
       }
@@ -2738,10 +2836,17 @@
     function handleDetailAdd() {
       const name = document.getElementById('detailName').textContent;
       const sub = document.getElementById('detailSub').textContent;
-      const activeSize = document.querySelector('#detailSizeBtns .size-btn.active');
-      let size = activeSize ? activeSize.textContent.trim() : '';
-      let cartName = name;
-      if (currentVariantStarts && size) { cartName = name + ' ' + size; size = ''; }
+      // "Talle" goes to the size field; every other choice (modelo, casco…)
+      // becomes part of the item name so each combination is its own line.
+      let size = '';
+      const extras = [];
+      document.querySelectorAll('#detailOptions .detail-size-selector').forEach(block => {
+        const active = block.querySelector('.size-btn.active');
+        if (!active) return;
+        const value = active.textContent.trim();
+        if (block.dataset.label === 'Talle') size = value; else extras.push(value);
+      });
+      const cartName = extras.length ? name + ' · ' + extras.join(' · ') : name;
       addToCart(cartName, sub, currentPricePrefix, currentUnitPrice, qty, size);
       document.getElementById('cartPopupOverlay').classList.add('open');
     }
