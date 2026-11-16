@@ -401,6 +401,66 @@
     }
     .detail-media-dot.detail-thumb.active { border-color: #fff; opacity: 1; }
 
+    /* PRODUCT VARIANT CHIPS (tarjetas) */
+    .product-variants {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .variant-chip {
+      font-family: inherit;
+      font-variation-settings: inherit;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border: 1px solid rgba(0,0,0,0.18);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .variant-chip:hover:not(.active) { border-color: var(--text); color: var(--text); }
+    .variant-chip.active { background: var(--ocean); border-color: var(--ocean); color: white; }
+
+    .product-variants + .product-variants { margin-top: -4px; }
+    .product-variant-desc {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .detail-variant-desc {
+      margin-top: 0.75rem;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* BOTON "LO QUIERO" (tarjetas) */
+    /* Tarjetas en columna para que "¡Lo quiero!" quede siempre abajo y alineado */
+    .product-card { display: flex; flex-direction: column; }
+    .product-card .product-info { flex: 1; display: flex; flex-direction: column; }
+    .product-card .product-footer { margin-bottom: 12px; }
+    .btn-want {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin-top: auto;
+      background: var(--red);
+      color: var(--cream);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 11px 14px;
+      transition: background 0.2s;
+    }
+    .btn-want:hover { background: var(--red-light); }
+
     /* PRODUCT MEDIA CAROUSEL */
     .product-img-wrap {
       aspect-ratio: 3/4;
@@ -1294,6 +1354,26 @@
     }
     .detail-add-btn:hover { background: var(--red-light); }
 
+    .detail-wa-btn {
+      display: block;
+      width: 100%;
+      margin-top: 0.75rem;
+      text-align: center;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--text);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 15px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .detail-wa-btn:hover { background: var(--text); color: var(--cream); }
+    .detail-wa-btn.primary { margin-top: 0; background: var(--red); border-color: var(--red); color: var(--cream); }
+    .detail-wa-btn.primary:hover { background: var(--red-light); border-color: var(--red-light); }
+
     .detail-added {
       display: none;
       align-items: center;
@@ -1643,108 +1723,7 @@
       <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">&#8592;</button>
       <div class="carousel-track-wrap">
         <div class="carousel-track" id="carouselTrack">
-
-          <div class="product-card" onclick="openModal(this)"
-            data-emoji="👒" data-name="Gorro surf" data-sub="Gorros"
-            data-sizes="Hojas|Estrellas" data-size-label="Modelo" data-variant-starts="0|1"
-            data-desc="Gorro de surf para usar en el agua y en la playa. Tiene un casco interno que lo mantiene firme en la cabeza, ala ancha que protege del sol y correa ajustable para que no se vuele con el viento ni se pierda en las olas."
-            data-price="Consultar" data-badge="" data-badge-class=""
-            data-detail="Casco interno que se ajusta a la cabeza||Ala ancha para protegerte del sol||Correa ajustable con traba al mentón||Pensado para surfear, nadar y usar en la playa||Estampado exclusivo con logo Las Olas bordado">
-            <div class="product-img-wrap">
-              <div class="product-media-carousel">
-                <img class="product-media-slide" src="gorro-1.jpg" alt="Gorro Las Olas">
-                <img class="product-media-slide" src="gorro-2.jpg" alt="Gorro surf modelo Estrellas">
-              </div>
-            </div>
-            <div class="product-info">
-              <p class="product-name">Gorro surf</p>
-              <p class="product-sub">Casco interno · Modelos Hojas y Estrellas</p>
-              <div class="product-footer">
-                <span class="product-price">Consultar</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card" onclick="openModal(this)"
-            data-emoji="🐚" data-name="Pinza antiviento" data-sub="Antiviento"
-            data-desc="Dos pinzas antiviento para reposera. Elegí tu modelo: Caracol o Perla."
-            data-price="$420" data-badge="" data-badge-class=""
-            data-sizes="Caracol|Perla" data-size-label="Modelo" data-variant-starts="0|3">
-            <div class="product-img-wrap">
-              <div class="product-media-carousel">
-                <img class="product-media-slide" src="caracol-1.jpg" alt="Pinza antiviento Caracol">
-                <img class="product-media-slide" src="caracol-2.jpg" alt="Pinza antiviento Caracol">
-                <img class="product-media-slide" src="caracol-3.jpg" alt="Pinza antiviento Caracol">
-                <img class="product-media-slide" src="perla-1.jpg" alt="Pinza antiviento Perla">
-                <img class="product-media-slide" src="perla-2.jpg" alt="Pinza antiviento Perla">
-                <img class="product-media-slide" src="perla-3.jpg" alt="Pinza antiviento Perla">
-              </div>
-            </div>
-            <div class="product-info">
-              <p class="product-name">Pinza antiviento</p>
-              <p class="product-sub">Modelos Caracol y Perla</p>
-              <div class="product-footer">
-                <span class="product-price">$420</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card" onclick="openModal(this)"
-            data-emoji="🎀" data-name="Elástico Scottish" data-sub="Antiviento"
-            data-desc="Elástico de 40cm de largo (diámetro 80cm) y 4 cm de ancho. Sostiene pareo o toalla en reposera convencional de playa."
-            data-price="$250" data-badge="" data-badge-class="">
-            <div class="product-img-wrap">
-              <div class="product-media-carousel">
-                <img class="product-media-slide" src="scottish-1.jpg" alt="Elástico Scottish">
-                <img class="product-media-slide" src="scottish-2.jpg" alt="Elástico Scottish">
-                <img class="product-media-slide" src="scottish-3.jpg" alt="Elástico Scottish">
-              </div>
-              <button class="product-media-arrow prev" onclick="slideMedia(event,this,-1)">&#8592;</button>
-              <button class="product-media-arrow next" onclick="slideMedia(event,this,1)">&#8594;</button>
-              <div class="product-media-dots">
-                <button class="product-media-dot active" onclick="goToSlide(event,this,0)"></button>
-                <button class="product-media-dot" onclick="goToSlide(event,this,1)"></button>
-                <button class="product-media-dot" onclick="goToSlide(event,this,2)"></button>
-              </div>
-            </div>
-            <div class="product-info">
-              <p class="product-name">Elástico Scottish</p>
-              <p class="product-sub">Elástico para reposera convencional de playa</p>
-              <div class="product-footer">
-                <span class="product-price">$250</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card" onclick="openModal(this)"
-            data-emoji="👗" data-name="Poalla" data-sub="Textil"
-            data-desc="POllera con toALLA. Una pollera pensada para usar todo el verano. Perfecta para usarla con traje de baño debajo. Estampado cool por afuera y toalla de fácil secado por dentro."
-            data-price="$590" data-badge="" data-badge-class=""
-            data-sizes="S/M|M/L"
-            data-detail="Materiales: lino y algodón por fuera, forro de algodón y sintético.||Talle S/M: largo: 45cm, ancho: 110cm||Talle M/L: largo: 55cm, ancho: 125cm">
-            <div class="product-img-wrap">
-              <div class="product-media-carousel">
-                <img class="product-media-slide" src="poalla-1.jpg" alt="Poalla">
-                <img class="product-media-slide" src="poalla-2.jpg" alt="Poalla">
-                <img class="product-media-slide" src="poalla-3.jpg" alt="Poalla">
-              </div>
-              <button class="product-media-arrow prev" onclick="slideMedia(event,this,-1)">&#8592;</button>
-              <button class="product-media-arrow next" onclick="slideMedia(event,this,1)">&#8594;</button>
-              <div class="product-media-dots">
-                <button class="product-media-dot active" onclick="goToSlide(event,this,0)"></button>
-                <button class="product-media-dot" onclick="goToSlide(event,this,1)"></button>
-                <button class="product-media-dot" onclick="goToSlide(event,this,2)"></button>
-              </div>
-            </div>
-            <div class="product-info">
-              <p class="product-name">Poalla</p>
-              <p class="product-sub">Pollera con toalla · S/M y M/L</p>
-              <div class="product-footer">
-                <span class="product-price">$590</span>
-              </div>
-            </div>
-          </div>
-
+          <!-- Se arma solo con los productos de la tienda que tienen data-fav (ver buildFavoritos) -->
         </div>
       </div>
       <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">&#8594;</button>
@@ -1783,11 +1762,12 @@
       <div class="products-grid">
 
         <!-- ANTIVIENTO -->
-        <div class="product-card" onclick="openModal(this)"
+        <div class="product-card" onclick="openModal(this)" data-fav="2"
           data-emoji="🐚" data-name="Pinza antiviento" data-sub="Antiviento"
-          data-desc="Dos pinzas antiviento para reposera. Elegí tu modelo: Caracol o Perla."
+          data-desc="Dos pinzas antiviento para reposera. Elegí tu modelo."
           data-price="$420" data-badge="" data-badge-class=""
-          data-sizes="Caracol|Perla" data-size-label="Modelo" data-variant-starts="0|3">
+          data-sizes="Pinza 1|Pinza 2" data-size-label="Modelo" data-variant-starts="0|3"
+          data-variant-descs="Descripción de Pinza 1: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).|Descripción de Pinza 2: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).">
           <div class="product-img-wrap">
             <div class="product-media-carousel">
               <img class="product-media-slide" src="caracol-1.jpg" alt="Pinza antiviento Caracol">
@@ -1800,22 +1780,24 @@
           </div>
           <div class="product-info">
             <p class="product-name">Pinza antiviento</p>
-            <p class="product-sub">Modelos Caracol y Perla</p>
+            <p class="product-sub">2 modelos</p>
             <div class="product-footer">
               <span class="product-price">$420</span>
             </div>
           </div>
         </div>
 
-        <div class="product-card" onclick="openModal(this)"
-          data-emoji="🎀" data-name="Elástico Scottish" data-sub="Antiviento"
+        <div class="product-card" onclick="openModal(this)" data-fav="3"
+          data-emoji="🎀" data-name="Elásticos" data-sub="Antiviento"
           data-desc="Elástico de 40cm de largo (diámetro 80cm) y 4 cm de ancho. Sostiene pareo o toalla en reposera convencional de playa."
-          data-price="$250" data-badge="" data-badge-class="">
+          data-price="$250" data-badge="" data-badge-class=""
+          data-sizes="Elástico 1|Elástico 2|Elástico 3" data-size-label="Modelo"
+          data-variant-descs="Descripción de Elástico 1: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).|Descripción de Elástico 2: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).|Descripción de Elástico 3: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).">
           <div class="product-img-wrap">
             <div class="product-media-carousel">
-              <img class="product-media-slide" src="scottish-1.jpg" alt="Elástico Scottish">
-              <img class="product-media-slide" src="scottish-2.jpg" alt="Elástico Scottish">
-              <img class="product-media-slide" src="scottish-3.jpg" alt="Elástico Scottish">
+              <img class="product-media-slide" src="scottish-1.jpg" alt="Elásticos">
+              <img class="product-media-slide" src="scottish-2.jpg" alt="Elásticos">
+              <img class="product-media-slide" src="scottish-3.jpg" alt="Elásticos">
             </div>
             <button class="product-media-arrow prev" onclick="slideMedia(event,this,-1)">&#8592;</button>
             <button class="product-media-arrow next" onclick="slideMedia(event,this,1)">&#8594;</button>
@@ -1826,8 +1808,8 @@
             </div>
           </div>
           <div class="product-info">
-            <p class="product-name">Elástico Scottish</p>
-            <p class="product-sub">Elástico para reposera convencional de playa</p>
+            <p class="product-name">Elásticos</p>
+            <p class="product-sub">Para reposera de playa · 3 modelos</p>
             <div class="product-footer">
               <span class="product-price">$250</span>
             </div>
@@ -1900,21 +1882,23 @@
         </div>
 
         <!-- GORROS -->
-        <div class="product-card" onclick="openModal(this)"
+        <div class="product-card" onclick="openModal(this)" data-fav="1"
           data-emoji="👒" data-name="Gorro surf" data-sub="Gorros"
-            data-sizes="Hojas|Estrellas" data-size-label="Modelo" data-variant-starts="0|1"
-          data-desc="Gorro de surf para usar en el agua y en la playa. Tiene un casco interno que lo mantiene firme en la cabeza, ala ancha que protege del sol y correa ajustable para que no se vuele con el viento ni se pierda en las olas."
+          data-sizes="Gorro 1|Gorro 2" data-size-label="Modelo" data-variant-starts="0|1"
+          data-variant-descs="Descripción de Gorro 1: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).|Descripción de Gorro 2: acá va el texto propio de este modelo (estampado, colores, materiales y detalles)."
+          data-options="Con casco|Sin casco" data-option-label="Casco"
+          data-desc="Gorro de surf para usar en el agua y en la playa. Ala ancha que protege del sol y correa ajustable para que no se vuele con el viento ni se pierda en las olas. Cada modelo se puede usar y encargar con o sin casco interno, que lo mantiene firme en la cabeza."
           data-price="Consultar" data-badge="" data-badge-class=""
-          data-detail="Casco interno que se ajusta a la cabeza||Ala ancha para protegerte del sol||Correa ajustable con traba al mentón||Pensado para surfear, nadar y usar en la playa||Estampado exclusivo con logo Las Olas bordado">
+          data-detail="Casco interno opcional que se ajusta a la cabeza||Ala ancha para protegerte del sol||Correa ajustable con traba al mentón||Pensado para surfear, nadar y usar en la playa||Estampado exclusivo con logo Las Olas bordado">
           <div class="product-img-wrap">
             <div class="product-media-carousel">
-              <img class="product-media-slide" src="gorro-1.jpg" alt="Gorro Las Olas">
-                <img class="product-media-slide" src="gorro-2.jpg" alt="Gorro surf modelo Estrellas">
+              <img class="product-media-slide" src="gorro-1.jpg" alt="Gorro surf modelo Gorro 1">
+              <img class="product-media-slide" src="gorro-2.jpg" alt="Gorro surf modelo Gorro 2">
             </div>
           </div>
           <div class="product-info">
             <p class="product-name">Gorro surf</p>
-            <p class="product-sub">Casco interno · Modelos Hojas y Estrellas</p>
+            <p class="product-sub">2 modelos · Con o sin casco</p>
             <div class="product-footer">
               <span class="product-price">Consultar</span>
             </div>
@@ -1922,7 +1906,7 @@
         </div>
 
         <!-- TEXTIL -->
-        <div class="product-card" onclick="openModal(this)"
+        <div class="product-card" onclick="openModal(this)" data-fav="4"
           data-emoji="👗" data-name="Poalla" data-sub="Textil"
           data-desc="POllera con toALLA. Una pollera pensada para usar todo el verano. Perfecta para usarla con traje de baño debajo. Estampado cool por afuera y toalla de fácil secado por dentro."
           data-price="$590" data-badge="" data-badge-class=""
@@ -1947,6 +1931,24 @@
             <p class="product-sub">Pollera con toalla · S/M y M/L</p>
             <div class="product-footer">
               <span class="product-price">$590</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" onclick="openModal(this)" data-fav="5"
+          data-emoji="🌺" data-name="Pareos" data-sub="Textil"
+          data-desc="Pareo liviano para la playa. Elegí entre 5 diseños."
+          data-price="Consultar" data-badge="" data-badge-class=""
+          data-sizes="Pareo 1|Pareo 2|Pareo 3|Pareo 4|Pareo 5" data-size-label="Modelo"
+          data-variant-descs="Descripción de Pareo 1: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).|Descripción de Pareo 2: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).|Descripción de Pareo 3: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).|Descripción de Pareo 4: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).|Descripción de Pareo 5: acá va el texto propio de este modelo (estampado, colores, materiales y detalles).">
+          <div class="product-img-wrap">
+            <div class="product-emoji-fallback">🌺</div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Pareos</p>
+            <p class="product-sub">5 modelos</p>
+            <div class="product-footer">
+              <span class="product-price">Consultar</span>
             </div>
           </div>
         </div>
@@ -2107,12 +2109,19 @@
         <div class="detail-size-selector" id="detailSizeSelector">
           <p class="detail-size-label">Talle</p>
           <div class="detail-size-btns" id="detailSizeBtns"></div>
+          <p class="detail-variant-desc" id="detailVariantDesc"></p>
+        </div>
+
+        <!-- OPTION SELECTOR (ej: con o sin casco) -->
+        <div class="detail-size-selector" id="detailOptionSelector">
+          <p class="detail-size-label" id="detailOptionLabel"></p>
+          <div class="detail-size-btns" id="detailOptionBtns"></div>
         </div>
 
         <p class="detail-price" id="detailPrice"></p>
 
         <!-- QUANTITY -->
-        <div class="detail-quantity">
+        <div class="detail-quantity" id="detailQuantity">
           <button class="qty-btn" onclick="changeQty(-1)">−</button>
           <span class="qty-value" id="qtyValue">1</span>
           <button class="qty-btn" onclick="changeQty(1)">+</button>
@@ -2124,6 +2133,7 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
             ¡Agregado al carrito!
           </div>
+          <a class="detail-wa-btn" id="detailWaBtn" href="#" target="_blank" rel="noopener" onclick="this.href = buildWhatsAppUrl()">Consultar por WhatsApp</a>
         </div>
 
         <!-- ACCORDION -->
@@ -2208,6 +2218,107 @@
   </div>
 
   <script>
+    // Numero de WhatsApp para consultas (formato internacional, sin + ni espacios)
+    const WHATSAPP_NUMBER = '598098000000';
+
+    // ¿El producto tiene variantes de modelo? (los talles no cuentan como variante)
+    function hasModelVariants(card) {
+      return !!card.dataset.sizes && (card.dataset.sizeLabel || 'Talle') !== 'Talle';
+    }
+
+    // "Los favoritos": copia de las tarjetas de la tienda marcadas con data-fav="n" (n = orden)
+    function buildFavoritos() {
+      const track = document.getElementById('carouselTrack');
+      if (!track || track.querySelector('.product-card')) return;
+      const cards = Array.from(document.querySelectorAll('#productos .product-card[data-fav]'))
+        .sort((a, b) => Number(a.dataset.fav) - Number(b.dataset.fav));
+      track.innerHTML = cards.map(c => c.outerHTML).join('');
+    }
+    buildFavoritos();
+
+    // Botones de variantes en las tarjetas (Gorro 1, Gorro 2, ...)
+    // Botones en las tarjetas: modelo/talle (data-sizes) y opción (data-options, ej: casco)
+    function buildVariantChips() {
+      document.querySelectorAll('.product-card').forEach(card => {
+        if (card.querySelector('.product-variants')) return;
+        const footer = card.querySelector('.product-footer');
+        if (!footer) return;
+        if (card.dataset.sizes) {
+          const row = document.createElement('div');
+          row.className = 'product-variants';
+          row.innerHTML = card.dataset.sizes.split('|').map((name, i) =>
+            `<button class="variant-chip${i===0?' active':''}" onclick="pickVariant(event,this,${i})">${name}</button>`
+          ).join('');
+          footer.insertAdjacentElement('beforebegin', row);
+          card.dataset.selectedVariant = '0';
+        }
+        if (card.dataset.options) {
+          const row = document.createElement('div');
+          row.className = 'product-variants product-options';
+          row.innerHTML = card.dataset.options.split('|').map((name, i) =>
+            `<button class="variant-chip option-chip${i===0?' active':''}" onclick="pickOption(event,this,${i})">${name}</button>`
+          ).join('');
+          footer.insertAdjacentElement('beforebegin', row);
+          card.dataset.selectedOption = '0';
+        }
+        if (card.dataset.variantDescs) {
+          const desc = document.createElement('p');
+          desc.className = 'product-variant-desc';
+          desc.textContent = card.dataset.variantDescs.split('|')[0];
+          footer.insertAdjacentElement('beforebegin', desc);
+        }
+      });
+    }
+
+    function pickOption(e, chip, index) {
+      e.stopPropagation();
+      const card = chip.closest('.product-card');
+      card.dataset.selectedOption = String(index);
+      card.querySelectorAll('.option-chip').forEach((c, i) => c.classList.toggle('active', i === index));
+    }
+
+    // Botón "¡Lo quiero!" debajo de cada producto: abre WhatsApp con lo elegido en la tarjeta
+    const WA_ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>';
+    function buildWantButtons() {
+      document.querySelectorAll('.product-card').forEach(card => {
+        if (card.querySelector('.btn-want')) return;
+        const info = card.querySelector('.product-info');
+        if (!info) return;
+        info.insertAdjacentHTML('beforeend',
+          `<a class="btn-want" href="#" target="_blank" rel="noopener" onclick="wantProduct(event,this)">${WA_ICON}<span>¡Lo quiero!</span></a>`);
+      });
+    }
+
+    function wantProduct(e, btn) {
+      e.stopPropagation();
+      const card = btn.closest('.product-card');
+      const d = card.dataset;
+      const sizes = d.sizes ? d.sizes.split('|') : [];
+      const options = d.options ? d.options.split('|') : [];
+      btn.href = whatsAppUrlFor({
+        name: d.name,
+        size: sizes[Number(d.selectedVariant || 0)] || '',
+        sizeLabel: d.sizeLabel || 'Talle',
+        option: options[Number(d.selectedOption || 0)] || '',
+        qty: 1,
+        intro: '¡Hola! Lo quiero:'
+      });
+    }
+
+    function pickVariant(e, chip, index) {
+      e.stopPropagation();
+      const card = chip.closest('.product-card');
+      card.dataset.selectedVariant = String(index);
+      card.querySelectorAll('.variant-chip:not(.option-chip)').forEach((c, i) => c.classList.toggle('active', i === index));
+      const desc = card.querySelector('.product-variant-desc');
+      if (desc) desc.textContent = card.dataset.variantDescs.split('|')[index] || '';
+      const starts = card.dataset.variantStarts ? card.dataset.variantStarts.split('|').map(Number) : null;
+      const carousel = card.querySelector('.product-media-carousel');
+      if (starts && carousel && starts[index] !== undefined) {
+        carousel.style.transform = `translateX(-${starts[index] * 100}%)`;
+      }
+    }
+
     // Product card thumbnails (big photo + small variants below)
     function pickThumb(e, thumb, index) {
       e.stopPropagation();
@@ -2219,7 +2330,8 @@
 
     function buildCardThumbs() {
       document.querySelectorAll('.product-card').forEach(card => {
-        if (card.querySelector('.product-thumbs')) return;
+        // Si cada variante tiene sus fotos, los botones de variante reemplazan a las miniaturas
+        if (card.querySelector('.product-thumbs') || (hasModelVariants(card) && card.dataset.variantStarts)) return;
         const wrap = card.querySelector('.product-img-wrap');
         const slides = wrap ? wrap.querySelectorAll('.product-media-slide') : [];
         if (slides.length < 2) return;
@@ -2235,6 +2347,8 @@
       });
     }
     buildCardThumbs();
+    buildVariantChips();
+    buildWantButtons();
 
     // Product media carousel
     function slideMedia(e, btn, dir) {
@@ -2405,10 +2519,16 @@
     let qty = 1;
     let currentUnitPrice = 0;
     let currentPricePrefix = '$';
+    let currentPriceText = '';
+    let currentSizeLabel = 'Talle';
 
     function updateDetailPriceDisplay() {
-      const total = currentUnitPrice * qty;
-      document.getElementById('detailPrice').textContent = currentPricePrefix + total;
+      const el = document.getElementById('detailPrice');
+      if (currentUnitPrice > 0) {
+        el.textContent = currentPricePrefix + (currentUnitPrice * qty).toLocaleString('es');
+      } else {
+        el.textContent = currentPriceText === 'Consultar' ? 'Precio a consultar' : currentPriceText;
+      }
     }
 
     function changeQty(dir) {
@@ -2425,12 +2545,59 @@
     }
 
     let currentVariantStarts = null;
+    // Descripción propia de cada variante (data-variant-descs)
+    let currentVariantDescs = null;
+    function setDetailVariantDesc(index) {
+      const el = document.getElementById('detailVariantDesc');
+      el.textContent = currentVariantDescs ? (currentVariantDescs[index] || '') : '';
+      el.style.display = el.textContent ? '' : 'none';
+    }
+
     function selectSize(btn) {
       const btns = Array.from(btn.closest('.detail-size-btns').querySelectorAll('.size-btn'));
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const idx = btns.indexOf(btn);
+      setDetailVariantDesc(idx);
       if (currentVariantStarts && currentVariantStarts[idx] !== undefined) goToDetailSlide(currentVariantStarts[idx]);
+    }
+
+    function selectOption(btn) {
+      btn.closest('.detail-size-btns').querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // Al mover las fotos del detalle, marcar la variante a la que pertenece esa foto
+    function syncVariantFromSlide(index) {
+      if (!currentVariantStarts) return;
+      let variant = 0;
+      currentVariantStarts.forEach((start, i) => { if (index >= start) variant = i; });
+      document.querySelectorAll('#detailSizeBtns .size-btn').forEach((b, i) => b.classList.toggle('active', i === variant));
+      setDetailVariantDesc(variant);
+    }
+
+    function getDetailSelection() {
+      const size = document.querySelector('#detailSizeBtns .size-btn.active');
+      const option = document.querySelector('#detailOptionBtns .size-btn.active');
+      return {
+        name: document.getElementById('detailName').textContent,
+        sub: document.getElementById('detailSub').textContent,
+        size: size ? size.textContent.trim() : '',
+        option: option ? option.textContent.trim() : ''
+      };
+    }
+
+    function whatsAppUrlFor({ name, size, sizeLabel, option, qty, intro }) {
+      let msg = `${intro} ${name}`;
+      if (size) msg += sizeLabel === 'Talle' ? ` (talle ${size})` : ` – ${size}`;
+      if (option) msg += ` – ${option}`;
+      if (qty > 1) msg += ` – ${qty} unidades`;
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function buildWhatsAppUrl() {
+      const sel = getDetailSelection();
+      return whatsAppUrlFor({ ...sel, sizeLabel: currentSizeLabel, qty, intro: '¡Hola! Quería consultar por' });
     }
 
     // Accordion
@@ -2455,16 +2622,37 @@
       const sizeBtns = document.getElementById('detailSizeBtns');
       if (d.sizes) {
         const sizes = d.sizes.split('|');
+        const selected = Math.min(Number(d.selectedVariant || 0), sizes.length - 1);
         sizeBtns.innerHTML = sizes.map((s, i) =>
-          `<button class="size-btn${i===0?' active':''}" onclick="selectSize(this)">${s}</button>`
+          `<button class="size-btn${i===selected?' active':''}" onclick="selectSize(this)">${s}</button>`
         ).join('');
         sizeSelector.style.display = 'block';
-        document.querySelector('#detailSizeSelector .detail-size-label').textContent = d.sizeLabel || 'Talle';
+        currentSizeLabel = d.sizeLabel || 'Talle';
+        document.querySelector('#detailSizeSelector .detail-size-label').textContent = currentSizeLabel;
         currentVariantStarts = d.variantStarts ? d.variantStarts.split('|').map(Number) : null;
+        currentVariantDescs = d.variantDescs ? d.variantDescs.split('|') : null;
+        setDetailVariantDesc(selected);
       } else {
+        currentVariantDescs = null;
+        setDetailVariantDesc(0);
         sizeSelector.style.display = 'none';
         sizeBtns.innerHTML = '';
         currentVariantStarts = null;
+        currentSizeLabel = 'Talle';
+      }
+
+      // Option selector (ej: con o sin casco)
+      const optionSelector = document.getElementById('detailOptionSelector');
+      const optionBtns = document.getElementById('detailOptionBtns');
+      if (d.options) {
+        optionBtns.innerHTML = d.options.split('|').map((o, i) =>
+          `<button class="size-btn${i===Number(d.selectedOption || 0)?' active':''}" onclick="selectOption(this)">${o}</button>`
+        ).join('');
+        document.getElementById('detailOptionLabel').textContent = d.optionLabel || 'Opción';
+        optionSelector.style.display = 'block';
+      } else {
+        optionBtns.innerHTML = '';
+        optionSelector.style.display = 'none';
       }
 
       // Accordion description
@@ -2473,8 +2661,15 @@
       const priceMatch = String(d.price).match(/^([^\d]*)([\d.,]+)/);
       currentPricePrefix = priceMatch ? priceMatch[1] : '$';
       currentUnitPrice = priceMatch ? parseFloat(priceMatch[2].replace(/[.,]/g, '')) : 0;
+      currentPriceText = String(d.price || '');
       updateDetailPriceDisplay();
-      document.getElementById('detailAddBtn').style.display = 'block';
+      // Sin precio fijo: no se agrega al carrito, se consulta/encarga por WhatsApp
+      const canBuy = currentUnitPrice > 0;
+      document.getElementById('detailAddBtn').style.display = canBuy ? 'block' : 'none';
+      document.getElementById('detailQuantity').style.display = canBuy ? '' : 'none';
+      const waBtn = document.getElementById('detailWaBtn');
+      waBtn.classList.toggle('primary', !canBuy);
+      waBtn.textContent = canBuy ? 'Consultar por WhatsApp' : 'Consultar o encargar por WhatsApp';
       document.getElementById('detailAdded').style.display = 'none';
 
       // Build media area from the card's product-img-wrap
@@ -2509,6 +2704,12 @@
         mediaContainer.innerHTML = carouselHTML;
       } else {
         mediaContainer.innerHTML = `<div class="detail-emoji-fallback">${d.emoji}</div>`;
+      }
+
+      // Mostrar la foto de la variante elegida en la tarjeta
+      if (currentVariantStarts) {
+        const sel = Array.from(sizeBtns.querySelectorAll('.size-btn')).findIndex(b => b.classList.contains('active'));
+        if (sel > 0 && currentVariantStarts[sel] !== undefined) goToDetailSlide(currentVariantStarts[sel]);
       }
 
       document.getElementById('detailPage').classList.add('open');
@@ -2724,6 +2925,7 @@
       carousel.dataset.current = current;
       carousel.style.transform = `translateX(-${current * 100}%)`;
       dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      syncVariantFromSlide(current);
     }
 
     function goToDetailSlide(index) {
@@ -2733,15 +2935,16 @@
       carousel.dataset.current = index;
       carousel.style.transform = `translateX(-${index * 100}%)`;
       dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      syncVariantFromSlide(index);
     }
 
     function handleDetailAdd() {
-      const name = document.getElementById('detailName').textContent;
-      const sub = document.getElementById('detailSub').textContent;
-      const activeSize = document.querySelector('#detailSizeBtns .size-btn.active');
-      let size = activeSize ? activeSize.textContent.trim() : '';
-      let cartName = name;
-      if (currentVariantStarts && size) { cartName = name + ' ' + size; size = ''; }
+      const sel = getDetailSelection();
+      const sub = sel.sub;
+      let size = sel.size;
+      let cartName = sel.name;
+      if (currentSizeLabel !== 'Talle' && size) { cartName = sel.name + ' – ' + size; size = ''; }
+      if (sel.option) cartName += ' (' + sel.option + ')';
       addToCart(cartName, sub, currentPricePrefix, currentUnitPrice, qty, size);
       document.getElementById('cartPopupOverlay').classList.add('open');
     }
