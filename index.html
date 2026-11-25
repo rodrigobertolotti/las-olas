@@ -2378,6 +2378,8 @@
     // Tienda as its own page
     function openShop() {
       closeAllOverlays();
+      document.querySelectorAll('nav.mobile-menu-open').forEach(n => n.classList.remove('mobile-menu-open'));
+      document.querySelectorAll('nav .mobile-open').forEach(el => el.classList.remove('mobile-open'));
       pushOverlayHistory();
       const slot = document.getElementById('shopNavSlot');
       if (slot && !slot.children.length) {
@@ -2404,6 +2406,11 @@
       const original = document.querySelector('nav');
       if (!original) return null;
       const clone = original.cloneNode(true);
+      // Start the copy with the mobile menu closed, and close the original too
+      clone.classList.remove('mobile-menu-open');
+      clone.querySelectorAll('.mobile-open').forEach(el => el.classList.remove('mobile-open'));
+      original.classList.remove('mobile-menu-open');
+      original.querySelectorAll('.mobile-open').forEach(el => el.classList.remove('mobile-open'));
       clone.querySelectorAll('a[href="#productos"]').forEach(a => {
         const existing = a.getAttribute('onclick');
         a.setAttribute('onclick', existing ? `leaveOverlay(); ${existing}` : 'leaveOverlay()');
